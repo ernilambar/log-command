@@ -9,6 +9,44 @@ Quick links: [Using](#using) | [Installing](#installing)
 
 ## Using
 
+This package implements the following commands:
+
+### wp log clear
+
+Clear debug log content.
+
+~~~
+wp log clear 
+~~~
+
+**EXAMPLES**
+
+    # Clear log.
+    $ wp log clear
+    Success: Debug log content cleared successfully.
+
+
+
+### wp log delete
+
+Delete debug log file.
+
+~~~
+wp log delete 
+~~~
+
+**EXAMPLES**
+
+    # Delete log file.
+    $ wp log delete
+    Success: Debug log file deleted successfully.
+
+
+
+### wp log path
+
+Gets the path to the debug log file.
+
 ~~~
 wp log path 
 ~~~

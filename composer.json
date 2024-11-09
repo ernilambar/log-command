@@ -46,6 +46,8 @@
     },
     "extra": {
         "commands": [
+            "log clear",
+            "log delete",
             "log path"
         ],
         "readme": {
