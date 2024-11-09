@@ -50,6 +50,7 @@
             "log clear",
             "log count",
             "log delete",
+            "log file",
             "log path"
         ],
         "readme": {
