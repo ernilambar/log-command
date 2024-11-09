@@ -4,10 +4,8 @@ namespace Nilambar\Log_Command;
 
 use Exception;
 use WP_CLI;
-use WP_CLI\Utils;
-use WP_CLI_Command;
 
-class LogCommand extends WP_CLI_Command {
+class LogCommand extends AbstractLog {
 
 	/**
 	 * Get log entries.
@@ -35,12 +33,8 @@ class LogCommand extends WP_CLI_Command {
 			$number = intval( $args[0] );
 		}
 
-		$file = untrailingslashit( WP_CONTENT_DIR ) . '/debug.log';
-
-		$file_path = Utils\normalize_path( $file );
-
 		try {
-			$parser = new LogParser( $file_path );
+			$parser = new LogParser( $this->log_file );
 
 			$entries = $parser->find( $number );
 
@@ -86,16 +80,12 @@ class LogCommand extends WP_CLI_Command {
 			WP_Filesystem();
 		}
 
-		$file = untrailingslashit( WP_CONTENT_DIR ) . '/debug.log';
-
-		$file_path = Utils\normalize_path( $file );
-
-		if ( ! $wp_filesystem->exists( $file_path ) ) {
+		if ( ! $wp_filesystem->exists( $this->log_file ) ) {
 			WP_CLI::warning( 'Debug log file does not exist.' );
 			return;
 		}
 
-		if ( false === $wp_filesystem->put_contents( $file_path, '', FS_CHMOD_FILE ) ) {
+		if ( false === $wp_filesystem->put_contents( $this->log_file, '', FS_CHMOD_FILE ) ) {
 			WP_CLI::error( 'Error clearing debug log content.' );
 		}
 
@@ -114,12 +104,8 @@ class LogCommand extends WP_CLI_Command {
 	 * @subcommand delete
 	 */
 	public function delete( $args, $assoc_args = [] ) {
-		$file = untrailingslashit( WP_CONTENT_DIR ) . '/debug.log';
-
-		$file_path = Utils\normalize_path( $file );
-
-		if ( file_exists( $file_path ) ) {
-			wp_delete_file( $file_path );
+		if ( file_exists( $this->log_file ) ) {
+			wp_delete_file( $this->log_file );
 		}
 
 		WP_CLI::success( 'Debug log file deleted successfully.' );
@@ -131,12 +117,8 @@ class LogCommand extends WP_CLI_Command {
 	 * @subcommand count
 	 */
 	public function count( $args, $assoc_args = [] ) {
-		$file = untrailingslashit( WP_CONTENT_DIR ) . '/debug.log';
-
-		$file_path = Utils\normalize_path( $file );
-
 		try {
-			$parser = new LogParser( $file_path );
+			$parser = new LogParser( $this->log_file );
 
 			WP_CLI::line( $parser->count() );
 		} catch ( Exception $e ) {

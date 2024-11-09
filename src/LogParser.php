@@ -50,17 +50,17 @@ class LogParser {
 		foreach ( explode( "\n", $log_content ) as $line ) {
 			if ( preg_match( $date_pattern, $line ) ) {
 				// Start of a new log entry.
-				if ( $current_entry !== '' ) {
+				if ( '' !== $current_entry ) {
 					$log_entries[] = trim( $current_entry );
 				}
 				$current_entry = $line; // Start a new entry.
-			} elseif ( $current_entry !== '' ) {
+			} elseif ( '' !== $current_entry ) {
 				$current_entry .= "\n" . $line;
 			}
 		}
 
 		// Add the last log entry (if any).
-		if ( $current_entry !== '' ) {
+		if ( '' !== $current_entry ) {
 			$log_entries[] = trim( $current_entry );
 		}
 
