@@ -1,0 +1,74 @@
+{
+    "name": "ernilambar/log-command",
+    "description": "Debug log helpers.",
+    "license": "MIT",
+    "type": "wp-cli-package",
+    "authors": [
+        {
+            "name": "Nilambar Sharma",
+            "email": "nilambar@outlook.com",
+            "homepage": "https://nilambar.net/",
+            "role": "Developer"
+        }
+    ],
+    "homepage": "https://github.com/ernilambar/log-command",
+    "support": {
+        "issues": "https://github.com/ernilambar/log-command/issues"
+    },
+    "require": {
+        "php": ">=7.2",
+        "wp-cli/wp-cli": "^2.11"
+    },
+    "require-dev": {
+        "slevomat/coding-standard": "^8",
+        "wp-cli/scaffold-package-command": "^2",
+        "wp-cli/wp-cli-tests": "^4"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "Nilambar\\Log_Command\\": "src"
+        },
+        "files": [
+            "command.php"
+        ]
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "ergebnis/composer-normalize": true,
+            "johnpbloch/wordpress-core-installer": true
+        },
+        "optimize-autoloader": true,
+        "process-timeout": 7200,
+        "sort-packages": true
+    },
+    "extra": {
+        "commands": [
+            "log path"
+        ],
+        "readme": {
+            "sections": [
+                "Using",
+                "Installing"
+            ]
+        }
+    },
+    "scripts": {
+        "behat": "run-behat-tests",
+        "behat-rerun": "rerun-behat-tests",
+        "lint": "run-linter-tests",
+        "phpcbf": "run-phpcbf-cleanup",
+        "phpcs": "run-phpcs-tests",
+        "phpunit": "run-php-unit-tests",
+        "prepare-tests": "install-package-tests",
+        "readme": "./vendor/bin/wp scaffold package-readme . --force",
+        "test": [
+            "@lint",
+            "@phpcs",
+            "@phpunit",
+            "@behat"
+        ]
+    }
+}
