@@ -51,6 +51,7 @@
             "log count",
             "log delete",
             "log file",
+            "log get",
             "log path"
         ],
         "readme": {
