@@ -47,6 +47,7 @@
     "extra": {
         "commands": [
             "log clear",
+            "log count",
             "log delete",
             "log path"
         ],

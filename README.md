@@ -27,6 +27,18 @@ wp log clear
 
 
 
+### wp log count
+
+Get number of entries.
+
+~~~
+wp log count 
+~~~
+
+
+
+
+
 ### wp log delete
 
 Delete debug log file.
