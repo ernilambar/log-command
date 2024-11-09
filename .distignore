@@ -1,4 +1,5 @@
 .DS_Store
+.gherkin-lintrc
 .git
 .gitignore
 .gitlab-ci.yml

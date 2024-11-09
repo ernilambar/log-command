@@ -18,6 +18,13 @@ class LogCommand extends AbstractLog {
 	 * [--all]
 	 * : If set, all entries are displayed.
 	 *
+	 * ## EXAMPLES
+	 *
+	 *     # Get 2 recent entries.
+	 *     $ wp log get 2
+	 *     [09-Nov-2024 06:01:29 UTC] Automatic updates starting...
+	 *     [09-Nov-2024 06:01:31 UTC] Automatic updates complete.
+	 *
 	 * @subcommand get
 	 */
 	public function get( $args, $assoc_args = [] ) {

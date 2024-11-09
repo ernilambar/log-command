@@ -75,6 +75,31 @@ wp log file
 
 
 
+### wp log get
+
+Gets log entries.
+
+~~~
+wp log get [<number>] [--all]
+~~~
+
+**OPTIONS**
+
+	[<number>]
+		Number of entries.
+
+	[--all]
+		If set, all entries are displayed.
+
+**EXAMPLES**
+
+    # Get 2 recent entries.
+    $ wp log get 2
+    [09-Nov-2024 06:01:29 UTC] Automatic updates starting...
+    [09-Nov-2024 06:01:31 UTC] Automatic updates complete.
+
+
+
 ### wp log path
 
 Gets the path to the debug log file.

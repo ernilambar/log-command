@@ -1,0 +1,17 @@
+name: Test
+
+on:
+  pull_request:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+  workflow_call:
+
+jobs:
+  test:
+    uses: wp-cli/.github/.github/workflows/reusable-testing.yml@main
+    with:
+      minimum-wp: '6.3'
+      minimum-php: '7.2'
+
