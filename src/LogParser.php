@@ -38,7 +38,7 @@ class LogParser {
 	}
 
 	private function parse() {
-		$this->entries = $this->extract_entries( file_get_contents( $this->log_file ) );
+		$this->entries = $this->extract_entries( file_get_contents( $this->log_file ) ); //phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
 	}
 
 	protected function extract_entries( string $log_content ): array {

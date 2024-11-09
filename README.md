@@ -13,7 +13,7 @@ This package implements the following commands:
 
 ### wp log clear
 
-Clear debug log content.
+Clears debug log content.
 
 ~~~
 wp log clear 
@@ -29,19 +29,23 @@ wp log clear
 
 ### wp log count
 
-Get number of entries.
+Gets number of entries.
 
 ~~~
 wp log count 
 ~~~
 
+**EXAMPLES**
 
+    # Get log entries count.
+    $ wp log count
+    4
 
 
 
 ### wp log delete
 
-Delete debug log file.
+Deletes debug log file.
 
 ~~~
 wp log delete 
@@ -52,6 +56,22 @@ wp log delete
     # Delete log file.
     $ wp log delete
     Success: Debug log file deleted successfully.
+
+
+
+### wp log file
+
+Gets the log file.
+
+~~~
+wp log file 
+~~~
+
+**EXAMPLES**
+
+    # Get log file.
+    $ wp log file
+    /Users/johndoe/Sites/staging/app/public/wp-content/debug.log
 
 
 

@@ -8,7 +8,7 @@ use WP_CLI;
 class LogCommand extends AbstractLog {
 
 	/**
-	 * Get log entries.
+	 * Gets log entries.
 	 *
 	 * ## OPTIONS
 	 *
@@ -34,9 +34,7 @@ class LogCommand extends AbstractLog {
 		}
 
 		try {
-			$parser = new LogParser( $this->log_file );
-
-			$entries = $parser->find( $number );
+			$entries = $this->parser->find( $number );
 
 			if ( ! empty( $entries ) ) {
 				WP_CLI::line( implode( "\n", $entries ) );
@@ -44,6 +42,21 @@ class LogCommand extends AbstractLog {
 		} catch ( Exception $e ) {
 			WP_CLI::warning( $e->getMessage() );
 		}
+	}
+
+	/**
+	 * Gets the log file.
+	 *
+	 * ## EXAMPLES
+	 *
+	 *     # Get log file.
+	 *     $ wp log file
+	 *     /Users/johndoe/Sites/staging/app/public/wp-content/debug.log
+	 *
+	 * @subcommand file
+	 */
+	public function file( $args, $assoc_args = [] ) {
+		WP_CLI::line( $this->log_file );
 	}
 
 	/**
@@ -58,11 +71,11 @@ class LogCommand extends AbstractLog {
 	 * @subcommand path
 	 */
 	public function path( $args, $assoc_args = [] ) {
-		WP_CLI::line( untrailingslashit( WP_CONTENT_DIR ) );
+		WP_CLI::line( dirname( $this->log_file ) );
 	}
 
 	/**
-	 * Clear debug log content.
+	 * Clears debug log content.
 	 *
 	 * ## EXAMPLES
 	 *
@@ -93,7 +106,7 @@ class LogCommand extends AbstractLog {
 	}
 
 	/**
-	 * Delete debug log file.
+	 * Deletes debug log file.
 	 *
 	 * ## EXAMPLES
 	 *
@@ -112,15 +125,19 @@ class LogCommand extends AbstractLog {
 	}
 
 	/**
-	 * Get number of entries.
+	 * Gets number of entries.
+	 *
+	 * ## EXAMPLES
+	 *
+	 *     # Get log entries count.
+	 *     $ wp log count
+	 *     4
 	 *
 	 * @subcommand count
 	 */
 	public function count( $args, $assoc_args = [] ) {
 		try {
-			$parser = new LogParser( $this->log_file );
-
-			WP_CLI::line( $parser->count() );
+			WP_CLI::line( $this->parser->count() );
 		} catch ( Exception $e ) {
 			WP_CLI::warning( $e->getMessage() );
 		}

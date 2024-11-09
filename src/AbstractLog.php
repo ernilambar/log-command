@@ -10,6 +10,8 @@ abstract class AbstractLog extends WP_CLI_Command {
 
 	protected $log_file;
 
+	protected $parser;
+
 	public function __construct() {
 		$file = untrailingslashit( WP_CONTENT_DIR ) . '/debug.log';
 
@@ -29,5 +31,6 @@ abstract class AbstractLog extends WP_CLI_Command {
 		}
 
 		$this->log_file = Utils\normalize_path( $file );
+		$this->parser   = new LogParser( $this->log_file );
 	}
 }
