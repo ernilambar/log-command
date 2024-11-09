@@ -127,7 +127,7 @@ wp package install ernilambar/log-command:@stable
 To install the latest development version of this package, use the following command instead:
 
 ```bash
-wp package install ernilambar/log-command:dev-master
+wp package install ernilambar/log-command:dev-main
 ```
 
 
