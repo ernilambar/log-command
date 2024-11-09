@@ -3,6 +3,7 @@
 namespace Nilambar\Log_Command;
 
 use WP_CLI;
+use WP_CLI\Utils;
 use WP_CLI_Command;
 
 class LogCommand extends WP_CLI_Command {
@@ -43,7 +44,7 @@ class LogCommand extends WP_CLI_Command {
 
 		$file = untrailingslashit( WP_CONTENT_DIR ) . '/debug.log';
 
-		$file_path = WP_CLI\Utils\normalize_path( $file );
+		$file_path = Utils\normalize_path( $file );
 
 		if ( ! $wp_filesystem->exists( $file_path ) ) {
 			WP_CLI::warning( 'Debug log file does not exist.' );
@@ -71,7 +72,7 @@ class LogCommand extends WP_CLI_Command {
 	public function delete( $args, $assoc_args = [] ) {
 		$file = untrailingslashit( WP_CONTENT_DIR ) . '/debug.log';
 
-		$file_path = WP_CLI\Utils\normalize_path( $file );
+		$file_path = Utils\normalize_path( $file );
 
 		if ( file_exists( $file_path ) ) {
 			wp_delete_file( $file_path );
