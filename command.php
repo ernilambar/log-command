@@ -1,4 +1,9 @@
 <?php
+/**
+ * Command initialization
+ *
+ * @package log-command
+ */
 
 namespace Nilambar\Log_Command;
 

@@ -1,8 +1,17 @@
 <?php
+/**
+ * Class Nilambar\Log_Command\LogUtils
+ *
+ * @package log-command
+ */
+
 declare(strict_types=1);
 
 namespace Nilambar\Log_Command;
 
+/**
+ * Log Utils class.
+ */
 class LogUtils {
 
 	/**

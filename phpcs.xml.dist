@@ -35,6 +35,8 @@
 		<exclude name="WordPress.WP.AlternativeFunctions.json_encode_json_encode"/>
 	</rule>
 
+	<rule ref="WordPress-Docs" />
+
 	<rule ref="WP_CLI_CS"/>
 
 	<!-- Enforce short arrays. -->
