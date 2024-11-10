@@ -7,9 +7,9 @@ use Exception;
 
 class LogParser {
 
-	private string $log_file;
+	private $log_file;
 
-	private array $entries = [];
+	private $entries = [];
 
 	public function __construct( string $log_file ) {
 		if ( file_exists( $log_file ) ) {
