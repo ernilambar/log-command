@@ -48,6 +48,18 @@ class LogCommand extends AbstractLog {
 	 *   - yaml
 	 * ---
 	 *
+	 * [--page=<page>]
+	 * : Page to display. Defaults to 1.
+	 * ---
+	 * default: 1
+	 * ---
+	 *
+	 * [--per-page=<per-page>]
+	 * : Number of entries to display. Defaults to 10.
+	 * ---
+	 * default: 10
+	 * ---
+	 *
 	 * [--chronological]
 	 * : If set, chronological order is used.
 	 *
@@ -88,7 +100,7 @@ class LogCommand extends AbstractLog {
 		$chronological = WP_CLI\Utils\get_flag_value( $assoc_args, 'chronological', false );
 
 		try {
-			$entries = $this->parser->fetch( 10, $chronological );
+			$entries = $this->parser->fetch( (int) $assoc_args['per-page'], (int) $assoc_args['page'], $chronological );
 
 			if ( ! empty( $entries ) ) {
 				$items = $this->prepare_data( $entries, $assoc_args );
@@ -119,8 +131,8 @@ class LogCommand extends AbstractLog {
 	 *
 	 *     # Get 2 recent entries.
 	 *     $ wp log get 2
-	 *     [09-Nov-2024 06:01:29 UTC] Automatic updates starting...
 	 *     [09-Nov-2024 06:01:31 UTC] Automatic updates complete.
+	 *     [09-Nov-2024 06:01:29 UTC] Automatic updates starting...
 	 *
 	 * @subcommand get
 	 *
@@ -142,7 +154,7 @@ class LogCommand extends AbstractLog {
 		}
 
 		try {
-			$entries = $this->parser->fetch( $number, $chronological );
+			$entries = $this->parser->fetch( $number, 1, $chronological );
 
 			if ( ! empty( $entries ) ) {
 				WP_CLI::line( implode( "\n", $entries ) );
