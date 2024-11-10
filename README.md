@@ -151,8 +151,8 @@ These fields are optionally available:
     # List entries.
     $ wp log list --format=csv
     date,excerpt
-    "09-Nov-2024 06:01:29 UTC","Automatic updates starting..."
     "09-Nov-2024 06:01:31 UTC","Automatic updates complete."
+    "09-Nov-2024 06:01:29 UTC","Automatic updates starting..."
     ...
 
 
