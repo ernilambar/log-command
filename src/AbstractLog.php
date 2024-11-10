@@ -3,6 +3,7 @@
 namespace Nilambar\Log_Command;
 
 use WP_CLI;
+use WP_CLI\Formatter;
 use WP_CLI\Utils;
 use WP_CLI_Command;
 
@@ -32,5 +33,9 @@ abstract class AbstractLog extends WP_CLI_Command {
 
 		$this->log_file = Utils\normalize_path( $file );
 		$this->parser   = new LogParser( $this->log_file );
+	}
+
+	protected function get_formatter( &$assoc_args ) {
+		return new Formatter( $assoc_args, $this->obj_fields );
 	}
 }

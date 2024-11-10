@@ -21,16 +21,16 @@ class LogParser {
 		$this->parse();
 	}
 
-	public function find( int $num ) {
+	public function fetch( int $num, bool $chronological ): array {
+		$all_entries = $chronological ? $this->entries : array_reverse( $this->entries );
+
 		if ( -1 === $num ) {
-			return $this->entries;
+			return $all_entries;
+		} elseif ( 0 === $num ) {
+			return [];
 		}
 
-		$array_length = count( $this->entries );
-
-		$start_index = max( 0, $array_length - $num );
-
-		return array_slice( $this->entries, $start_index );
+		return array_slice( $all_entries, 0, $num );
 	}
 
 	public function count() {
