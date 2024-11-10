@@ -9,7 +9,7 @@ use WP_CLI;
 /**
  * Debug log helpers.
  *
- * Note: By default "reverse chronological" order is used.
+ * @since 1.0.0
  */
 class LogCommand extends AbstractLog {
 
@@ -19,9 +19,6 @@ class LogCommand extends AbstractLog {
 	 * Lists log entries.
 	 *
 	 * ## OPTIONS
-	 *
-	 * [--number=<number>]
-	 * : Number of entries.
 	 *
 	 * [--field=<field>]
 	 * : Returns the value of a single field.
@@ -42,6 +39,19 @@ class LogCommand extends AbstractLog {
 	 *
 	 * [--chronological]
 	 * : If set, chronological order is used.
+	 *
+	 * ## AVAILABLE FIELDS
+	 *
+	 * These fields will be displayed by default for each entry:
+	 *
+	 * * log_date
+	 * * excerpt
+	 *
+	 * These fields are optionally available:
+	 *
+	 * * date
+	 * * time_ago
+	 * * description
 	 *
 	 * ## EXAMPLES
 	 *
@@ -83,7 +93,8 @@ class LogCommand extends AbstractLog {
 		foreach ( $entries as $entry ) {
 			$exploded = explode( 'UTC]', $entry );
 
-			$log_date         = $exploded[0] . 'UTC]';
+			$log_date = $exploded[0] . 'UTC]';
+
 			$item['log_date'] = trim( $log_date, '[] ' );
 
 			$item['description'] = $exploded[1];

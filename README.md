@@ -1,7 +1,7 @@
 ernilambar/log-command
 ======================
 
-Debug log helpers.
+Debug log helpers. Note: By default "reverse chronological" order is used.
 
 
 
@@ -108,13 +108,10 @@ wp log get [<number>] [--all] [--chronological]
 Lists log entries.
 
 ~~~
-wp log list [--number=<number>] [--field=<field>] [--fields=<fields>] [--format=<format>] [--chronological]
+wp log list [--field=<field>] [--fields=<fields>] [--format=<format>] [--chronological]
 ~~~
 
 **OPTIONS**
-
-	[--number=<number>]
-		Number of entries.
 
 	[--field=<field>]
 		Returns the value of a single field.
@@ -135,6 +132,19 @@ wp log list [--number=<number>] [--field=<field>] [--fields=<fields>] [--format=
 
 	[--chronological]
 		If set, chronological order is used.
+
+**AVAILABLE FIELDS**
+
+These fields will be displayed by default for each entry:
+
+* log_date
+* excerpt
+
+These fields are optionally available:
+
+* date
+* time_ago
+* description
 
 **EXAMPLES**
 
