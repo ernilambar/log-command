@@ -1,6 +1,6 @@
 {
     "name": "ernilambar/log-command",
-    "description": "Debug log helpers.",
+    "description": "Debug log helpers. Note: By default \"reverse chronological\" order is used.",
     "license": "MIT",
     "type": "wp-cli-package",
     "authors": [
