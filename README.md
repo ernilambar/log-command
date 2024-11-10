@@ -100,6 +100,47 @@ wp log get [<number>] [--all]
 
 
 
+### wp log list
+
+Lists log entries.
+
+~~~
+wp log list [--number=<number>] [--field=<field>] [--fields=<fields>] [--format=<format>]
+~~~
+
+**OPTIONS**
+
+	[--number=<number>]
+		Number of entries.
+
+	[--field=<field>]
+		Returns the value of a single field.
+
+	[--fields=<fields>]
+		Limit the output to specific fields.
+
+	[--format=<format>]
+		Render output in a particular format.
+		---
+		default: table
+		options:
+		  - table
+		  - csv
+		  - json
+		  - yaml
+		---
+
+**EXAMPLES**
+
+    # List entries.
+    $ wp log list --format=csv
+    date,excerpt
+    "09-Nov-2024 06:01:29 UTC","Automatic updates starting..."
+    "09-Nov-2024 06:01:31 UTC","Automatic updates complete."
+    ...
+
+
+
 ### wp log path
 
 Gets the path to the debug log file.
