@@ -130,3 +130,29 @@ Feature: Test log commands
       Four
       Five
       """
+
+    When I run `wp log list --format=csv --field=excerpt --per-page=2`
+    Then STDOUT should be:
+      """
+      Five
+      Four
+      """
+
+    When I run `wp log list --format=csv --field=excerpt --per-page=2 --page=2`
+    Then STDOUT should be:
+      """
+      Three More text for third entry
+      Two
+      """
+
+    When I run `wp log list --format=csv --field=excerpt --per-page=2 --page=3`
+    Then STDOUT should be:
+      """
+      One
+      """
+
+    When I run `wp log list --format=csv --field=excerpt --per-page=2 --page=3 --chronological`
+    Then STDOUT should be:
+      """
+      Five
+      """

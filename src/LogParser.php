@@ -59,10 +59,11 @@ class LogParser {
 	 * @since 1.0.0
 	 *
 	 * @param int  $number        Number of entries to fetch.
+	 * @param int  $page          Page number.
 	 * @param bool $chronological Whether order should be chronological or not.
 	 * @return array Array of log entries.
 	 */
-	public function fetch( int $number, bool $chronological ): array {
+	public function fetch( int $number, int $page, bool $chronological ): array {
 		$all_entries = $chronological ? $this->entries : array_reverse( $this->entries );
 
 		if ( -1 === $number ) {
@@ -71,7 +72,9 @@ class LogParser {
 			return [];
 		}
 
-		return array_slice( $all_entries, 0, $number );
+		$offset = ( $page - 1 ) * $number;
+
+		return array_slice( $all_entries, $offset, $number );
 	}
 
 	/**

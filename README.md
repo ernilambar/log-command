@@ -98,8 +98,8 @@ wp log get [<number>] [--all] [--chronological]
 
     # Get 2 recent entries.
     $ wp log get 2
-    [09-Nov-2024 06:01:29 UTC] Automatic updates starting...
     [09-Nov-2024 06:01:31 UTC] Automatic updates complete.
+    [09-Nov-2024 06:01:29 UTC] Automatic updates starting...
 
 
 
@@ -108,7 +108,7 @@ wp log get [<number>] [--all] [--chronological]
 Lists log entries.
 
 ~~~
-wp log list [--field=<field>] [--fields=<fields>] [--format=<format>] [--chronological]
+wp log list [--field=<field>] [--fields=<fields>] [--format=<format>] [--page=<page>] [--per-page=<per-page>] [--chronological]
 ~~~
 
 **OPTIONS**
@@ -128,6 +128,18 @@ wp log list [--field=<field>] [--fields=<fields>] [--format=<format>] [--chronol
 		  - csv
 		  - json
 		  - yaml
+		---
+
+	[--page=<page>]
+		Page to display. Defaults to 1.
+		---
+		default: 1
+		---
+
+	[--per-page=<per-page>]
+		Number of entries to display. Defaults to 10.
+		---
+		default: 10
 		---
 
 	[--chronological]
