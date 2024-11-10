@@ -35,6 +35,8 @@
 		<exclude name="WordPress.WP.AlternativeFunctions.json_encode_json_encode"/>
 	</rule>
 
+	<rule ref="WP_CLI_CS"/>
+
 	<!-- Enforce short arrays. -->
 	<rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
 
@@ -84,5 +86,15 @@
 			</property>
 		</properties>
 	</rule>
+
+	<!-- Loads the PHP Compatibility ruleset. -->
+	<rule ref="PHPCompatibility">
+		<exclude name="PHPCompatibility.FunctionUse.NewFunctions.str_containsFound"/>
+		<exclude name="PHPCompatibility.FunctionUse.NewFunctions.str_starts_withFound"/>
+		<exclude name="PHPCompatibility.FunctionUse.NewFunctions.str_ends_withFound"/>
+	</rule>
+
+	<!-- PHP version check. -->
+	<config name="testVersion" value="7.2-"/>
 
 </ruleset>

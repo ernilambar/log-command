@@ -64,7 +64,7 @@ class LogCommand extends AbstractLog {
 	 *
 	 * @subcommand list
 	 */
-	public function list( $args, $assoc_args = [] ) {
+	public function list_( $args, $assoc_args = [] ) {
 		$default_fields = [ 'log_date', 'excerpt' ];
 
 		if ( empty( $assoc_args['fields'] ) ) {
