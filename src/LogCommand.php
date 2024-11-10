@@ -6,7 +6,6 @@ use DateTime;
 use Exception;
 use WP_CLI;
 
-
 /**
  * Debug log helpers.
  *
