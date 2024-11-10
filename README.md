@@ -80,7 +80,7 @@ wp log file
 Gets log entries.
 
 ~~~
-wp log get [<number>] [--all]
+wp log get [<number>] [--all] [--chronological]
 ~~~
 
 **OPTIONS**
@@ -90,6 +90,9 @@ wp log get [<number>] [--all]
 
 	[--all]
 		If set, all entries are displayed.
+
+	[--chronological]
+		If set, chronological order is used.
 
 **EXAMPLES**
 
@@ -105,7 +108,7 @@ wp log get [<number>] [--all]
 Lists log entries.
 
 ~~~
-wp log list [--number=<number>] [--field=<field>] [--fields=<fields>] [--format=<format>]
+wp log list [--number=<number>] [--field=<field>] [--fields=<fields>] [--format=<format>] [--chronological]
 ~~~
 
 **OPTIONS**
@@ -129,6 +132,9 @@ wp log list [--number=<number>] [--field=<field>] [--fields=<fields>] [--format=
 		  - json
 		  - yaml
 		---
+
+	[--chronological]
+		If set, chronological order is used.
 
 **EXAMPLES**
 
