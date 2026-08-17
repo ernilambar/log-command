@@ -11,6 +11,8 @@ namespace Nilambar\Log_Command;
 
 /**
  * Log Utils class.
+ *
+ * @since 1.0.0
  */
 class LogUtils {
 
