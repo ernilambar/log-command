@@ -1,7 +1,7 @@
 ernilambar/log-command
 ======================
 
-Debug log helpers. Note: By default "reverse chronological" order is used.
+Debug log helpers.
 
 
 
@@ -185,7 +185,7 @@ wp log path
 
 ## Installing
 
-Installing this package requires WP-CLI v2.11 or greater. Update to the latest stable release with `wp cli update`.
+Installing this package requires WP-CLI v3.0 or greater. Update to the latest stable release with `wp cli update`.
 
 Once you've done so, you can install the latest stable version of this package with:
 

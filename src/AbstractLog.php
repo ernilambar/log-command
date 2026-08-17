@@ -9,7 +9,7 @@ namespace Nilambar\Log_Command;
 
 use WP_CLI;
 use WP_CLI\Formatter;
-use WP_CLI\Utils;
+use WP_CLI\Path;
 use WP_CLI_Command;
 
 /**
@@ -23,6 +23,7 @@ abstract class AbstractLog extends WP_CLI_Command {
 	 * Log file.
 	 *
 	 * @since 1.0.0
+	 *
 	 * @var string
 	 */
 	protected $log_file;
@@ -31,9 +32,19 @@ abstract class AbstractLog extends WP_CLI_Command {
 	 * Parser object.
 	 *
 	 * @since 1.0.0
-	 * @var Nilambar\Log_Command\LogParser
+	 *
+	 * @var LogParser
 	 */
 	protected $parser;
+
+	/**
+	 * Object fields.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @var string[]
+	 */
+	protected $obj_fields = [];
 
 	/**
 	 * Constructor.
@@ -58,7 +69,7 @@ abstract class AbstractLog extends WP_CLI_Command {
 			$file = $config_value;
 		}
 
-		$this->log_file = Utils\normalize_path( $file );
+		$this->log_file = Path::normalize( $file );
 		$this->parser   = new LogParser( $this->log_file );
 	}
 
@@ -67,7 +78,7 @@ abstract class AbstractLog extends WP_CLI_Command {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param array $assoc_args Associative arguments.
+	 * @param array<string, mixed> $assoc_args Associative arguments.
 	 * @return WP_CLI\Formatter Formatter object.
 	 */
 	protected function get_formatter( &$assoc_args ) {

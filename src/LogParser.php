@@ -22,6 +22,7 @@ class LogParser {
 	 * Log file.
 	 *
 	 * @since 1.0.0
+	 *
 	 * @var string
 	 */
 	private $log_file;
@@ -30,7 +31,8 @@ class LogParser {
 	 * Log entries.
 	 *
 	 * @since 1.0.0
-	 * @var array
+	 *
+	 * @var array<int, string>
 	 */
 	private $entries = [];
 
@@ -61,7 +63,7 @@ class LogParser {
 	 * @param int  $number        Number of entries to fetch.
 	 * @param int  $page          Page number.
 	 * @param bool $chronological Whether order should be chronological or not.
-	 * @return array Array of log entries.
+	 * @return array<int, string> Array of log entries.
 	 */
 	public function fetch( int $number, int $page, bool $chronological ): array {
 		$all_entries = $chronological ? $this->entries : array_reverse( $this->entries );
@@ -93,8 +95,9 @@ class LogParser {
 	 *
 	 * @since 1.0.0
 	 */
-	private function parse() {
-		$this->entries = $this->extract_entries( file_get_contents( $this->log_file ) ); //phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+	private function parse(): void {
+		$contents      = file_get_contents( $this->log_file ); //phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+		$this->entries = $this->extract_entries( false === $contents ? '' : $contents );
 	}
 
 	/**
@@ -103,7 +106,7 @@ class LogParser {
 	 * @since 1.0.0
 	 *
 	 * @param string $log_content Content of log file.
-	 * @return array Array of log entries.
+	 * @return array<int, string> Array of log entries.
 	 */
 	protected function extract_entries( string $log_content ): array {
 		$log_entries   = [];

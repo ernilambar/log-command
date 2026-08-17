@@ -22,6 +22,7 @@ class LogCommand extends AbstractLog {
 	 * Fields.
 	 *
 	 * @since 1.0.0
+	 *
 	 * @var string[]
 	 */
 	protected $obj_fields = [ 'log_date', 'date', 'time_ago', 'excerpt', 'description' ];
@@ -85,12 +86,24 @@ class LogCommand extends AbstractLog {
 	 *     "09-Nov-2024 06:01:29 UTC","Automatic updates starting..."
 	 *     ...
 	 *
+	 * @since 1.0.0
+	 *
 	 * @subcommand list
 	 *
-	 * @param array $args       List of the positional arguments.
-	 * @param array $assoc_args List of the associative arguments.
+	 * @param array<int, mixed>    $args       List of the positional arguments.
+	 * @param array<string, mixed> $assoc_args List of the associative arguments.
+	 * @return void
 	 */
-	public function list_( $args, $assoc_args = [] ) {
+	public function list_( array $args, array $assoc_args = [] ): void {
+		$assoc_args = wp_parse_args(
+			$assoc_args,
+			[
+				'format'   => 'table',
+				'page'     => 1,
+				'per-page' => 10,
+			]
+		);
+
 		$default_fields = [ 'log_date', 'excerpt' ];
 
 		if ( empty( $assoc_args['fields'] ) ) {
@@ -103,7 +116,7 @@ class LogCommand extends AbstractLog {
 			$entries = $this->parser->fetch( (int) $assoc_args['per-page'], (int) $assoc_args['page'], $chronological );
 
 			if ( ! empty( $entries ) ) {
-				$items = $this->prepare_data( $entries, $assoc_args );
+				$items = $this->prepare_data( $entries );
 
 				$formatter = $this->get_formatter( $assoc_args );
 				$formatter->display_items( $items );
@@ -134,14 +147,17 @@ class LogCommand extends AbstractLog {
 	 *     [09-Nov-2024 06:01:31 UTC] Automatic updates complete.
 	 *     [09-Nov-2024 06:01:29 UTC] Automatic updates starting...
 	 *
+	 * @since 1.0.0
+	 *
 	 * @subcommand get
 	 *
-	 * @param array $args       List of the positional arguments.
-	 * @param array $assoc_args List of the associative arguments.
+	 * @param array<int, mixed>    $args       List of the positional arguments.
+	 * @param array<string, mixed> $assoc_args List of the associative arguments.
+	 * @return void
 	 */
-	public function get( $args, $assoc_args = [] ) {
+	public function get( array $args, array $assoc_args = [] ): void {
 		$all           = WP_CLI\Utils\get_flag_value( $assoc_args, 'all', false );
-		$chronological = WP_CLI\Utils\get_flag_value( $assoc_args, 'chronological', false );
+		$chronological = (bool) WP_CLI\Utils\get_flag_value( $assoc_args, 'chronological', false );
 
 		if ( empty( $args ) ) {
 			if ( ! $all ) {
@@ -150,7 +166,7 @@ class LogCommand extends AbstractLog {
 				$number = -1;
 			}
 		} else {
-			$number = intval( $args[0] );
+			$number = is_numeric( $args[0] ) ? (int) $args[0] : 0;
 		}
 
 		try {
@@ -173,12 +189,15 @@ class LogCommand extends AbstractLog {
 	 *     $ wp log file
 	 *     /Users/johndoe/Sites/staging/app/public/wp-content/debug.log
 	 *
+	 * @since 1.0.0
+	 *
 	 * @subcommand file
 	 *
-	 * @param array $args       List of the positional arguments.
-	 * @param array $assoc_args List of the associative arguments.
+	 * @param array<int, mixed>    $args       List of the positional arguments.
+	 * @param array<string, mixed> $assoc_args List of the associative arguments.
+	 * @return void
 	 */
-	public function file( $args, $assoc_args = [] ) {
+	public function file( array $args, array $assoc_args = [] ): void {
 		WP_CLI::line( $this->log_file );
 	}
 
@@ -191,12 +210,15 @@ class LogCommand extends AbstractLog {
 	 *     $ wp log path
 	 *     /Users/johndoe/Sites/staging/app/public/wp-content
 	 *
+	 * @since 1.0.0
+	 *
 	 * @subcommand path
 	 *
-	 * @param array $args       List of the positional arguments.
-	 * @param array $assoc_args List of the associative arguments.
+	 * @param array<int, mixed>    $args       List of the positional arguments.
+	 * @param array<string, mixed> $assoc_args List of the associative arguments.
+	 * @return void
 	 */
-	public function path( $args, $assoc_args = [] ) {
+	public function path( array $args, array $assoc_args = [] ): void {
 		WP_CLI::line( dirname( $this->log_file ) );
 	}
 
@@ -209,12 +231,15 @@ class LogCommand extends AbstractLog {
 	 *     $ wp log clear
 	 *     Success: Debug log content cleared successfully.
 	 *
+	 * @since 1.0.0
+	 *
 	 * @subcommand clear
 	 *
-	 * @param array $args       List of the positional arguments.
-	 * @param array $assoc_args List of the associative arguments.
+	 * @param array<int, mixed>    $args       List of the positional arguments.
+	 * @param array<string, mixed> $assoc_args List of the associative arguments.
+	 * @return void
 	 */
-	public function clear( $args, $assoc_args = [] ) {
+	public function clear( array $args, array $assoc_args = [] ): void {
 		global $wp_filesystem;
 
 		if ( ! $wp_filesystem ) {
@@ -243,12 +268,15 @@ class LogCommand extends AbstractLog {
 	 *     $ wp log delete
 	 *     Success: Debug log file deleted successfully.
 	 *
+	 * @since 1.0.0
+	 *
 	 * @subcommand delete
 	 *
-	 * @param array $args       List of the positional arguments.
-	 * @param array $assoc_args List of the associative arguments.
+	 * @param array<int, mixed>    $args       List of the positional arguments.
+	 * @param array<string, mixed> $assoc_args List of the associative arguments.
+	 * @return void
 	 */
-	public function delete( $args, $assoc_args = [] ) {
+	public function delete( array $args, array $assoc_args = [] ): void {
 		if ( file_exists( $this->log_file ) ) {
 			wp_delete_file( $this->log_file );
 		}
@@ -265,14 +293,17 @@ class LogCommand extends AbstractLog {
 	 *     $ wp log count
 	 *     4
 	 *
+	 * @since 1.0.0
+	 *
 	 * @subcommand count
 	 *
-	 * @param array $args       List of the positional arguments.
-	 * @param array $assoc_args List of the associative arguments.
+	 * @param array<int, mixed>    $args       List of the positional arguments.
+	 * @param array<string, mixed> $assoc_args List of the associative arguments.
+	 * @return void
 	 */
-	public function count( $args, $assoc_args = [] ) {
+	public function count( array $args, array $assoc_args = [] ): void {
 		try {
-			WP_CLI::line( $this->parser->count() );
+			WP_CLI::line( (string) $this->parser->count() );
 		} catch ( Exception $e ) {
 			WP_CLI::warning( $e->getMessage() );
 		}
@@ -283,10 +314,10 @@ class LogCommand extends AbstractLog {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param array $entries Log entries.
-	 * @return array Modified results.
+	 * @param array<int, string> $entries Log entries.
+	 * @return array<int, array<string, string>> Modified results.
 	 */
-	protected function prepare_data( $entries ) {
+	protected function prepare_data( array $entries ): array {
 		$output = [];
 
 		foreach ( $entries as $entry ) {
@@ -296,10 +327,10 @@ class LogCommand extends AbstractLog {
 
 			$item['log_date'] = trim( $log_date, '[] ' );
 
-			$item['description'] = $exploded[1];
+			$item['description'] = $exploded[1] ?? '';
 
 			$excerpt = LogUtils::get_excerpt( wp_strip_all_tags( $item['description'] ), 100 );
-			$excerpt = preg_replace( '/\s+/', ' ', $excerpt );
+			$excerpt = preg_replace( '/\s+/', ' ', $excerpt ) ?: '';
 
 			$item['excerpt'] = $excerpt;
 
@@ -307,7 +338,8 @@ class LogCommand extends AbstractLog {
 
 			$item['date'] = $date_time_obj->format( 'j M Y' );
 
-			$item['time_ago'] = LogUtils::get_time_ago( strtotime( $item['log_date'] ) );
+			$timestamp        = strtotime( $item['log_date'] );
+			$item['time_ago'] = LogUtils::get_time_ago( false === $timestamp ? 0 : $timestamp );
 
 			$output[] = $item;
 		}
